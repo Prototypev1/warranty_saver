@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:warranty_saver/core/presentation/di/di.dart';
-import 'package:warranty_saver/core/presentation/domain/repository/theme_repository.dart';
+import 'package:warranty_saver/di/di.dart';
+import 'package:warranty_saver/core/domain/repository/theme_repository.dart';
 import 'package:warranty_saver/core/presentation/navigation/router_configuration.dart';
 
 class App extends StatelessWidget {

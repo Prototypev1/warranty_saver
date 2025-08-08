@@ -31,6 +31,14 @@ class RouterConfiguration {
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => MainPageContainer(child: child),
           routes: [
+            GoRoute(
+              path: '/placeholder',
+              name: 'placeholder',
+              pageBuilder: (context, state) => NoTransitionPage(
+                key: state.pageKey,
+                child: const SizedBox.shrink(),
+              ),
+            ),
             // GoRoute(
             //   path: '/${HomePage.pageName}',
             //   name: HomePage.pageName,

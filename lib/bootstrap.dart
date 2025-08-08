@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
-import 'package:warranty_saver/core/presentation/di/di.dart';
+import 'package:warranty_saver/di/di.dart';
 import 'package:warranty_saver/core/presentation/navigation/router_configuration.dart';
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
