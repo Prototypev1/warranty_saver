@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:warranty_saver/feature/loading_page/presentation/loading_page.dart';
+import 'package:warranty_saver/feature/home_page/presentation/home_page.dart';
+import 'package:warranty_saver/feature/splash_page/presentation/splash_page.dart';
 import 'package:warranty_saver/feature/main_page_container/presentation/main_page_container.dart';
+import 'package:warranty_saver/feature/register_page/presentation/register_page.dart';
 
 class RouterConfiguration {
   RouterConfiguration();
@@ -19,31 +21,28 @@ class RouterConfiguration {
   void init() {
     _goRouter = GoRouter(
       navigatorKey: rootNavigatorKey,
-      initialLocation: '/${LoadingPage.pageName}',
+      initialLocation: '/${SplashPage.pageName}',
       debugLogDiagnostics: kDebugMode,
       routes: <RouteBase>[
         GoRoute(
-          path: '/${LoadingPage.pageName}',
-          name: LoadingPage.pageName,
-          pageBuilder: (context, state) => _getPage(key: state.pageKey, child: const LoadingPage()),
+          name: SplashPage.pageName,
+          path: '/${SplashPage.pageName}',
+          builder: (context, state) => const SplashPage(),
+        ),
+        GoRoute(
+          name: RegisterPage.pageName,
+          path: '/${RegisterPage.pageName}',
+          builder: (context, state) => const RegisterPage(),
         ),
         ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => MainPageContainer(child: child),
           routes: [
             GoRoute(
-              path: '/placeholder',
-              name: 'placeholder',
-              pageBuilder: (context, state) => NoTransitionPage(
-                key: state.pageKey,
-                child: const SizedBox.shrink(),
-              ),
+              path: '/${HomePage.pageName}',
+              name: HomePage.pageName,
+              pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const HomePage()),
             ),
-            // GoRoute(
-            //   path: '/${HomePage.pageName}',
-            //   name: HomePage.pageName,
-            //   pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const HomePage()),
-            // ),
             // GoRoute(
             //   path: '/${ContactPage.pageName}',
             //   name: ContactPage.pageName,
