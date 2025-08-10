@@ -1,1 +1,12 @@
-{}
+{
+    "bottom_bar": {
+        "home": "Home",
+        "warranties": "Warranties",
+        "add": "Add",
+        "profile": "Profile",
+        "donate": "Donate"
+    },
+    "splash_page": {
+        "warranty_saver": "Warranty Saver"
+    }
+}

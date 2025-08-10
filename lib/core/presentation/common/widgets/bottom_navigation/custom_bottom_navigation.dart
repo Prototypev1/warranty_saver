@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:warranty_saver/core/presentation/common/widgets/bottom_navigation/bottom_navigation_tab.dart';
@@ -6,6 +7,7 @@ import 'package:warranty_saver/feature/donations_page.dart/presentation/donation
 import 'package:warranty_saver/feature/home_page/presentation/home_page.dart';
 import 'package:warranty_saver/feature/profile_page/presentation/profile_page.dart';
 import 'package:warranty_saver/feature/warranties_page/presentation/warranties_page.dart';
+import 'package:warranty_saver/gen/locale_keys.g.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
   final int page;
@@ -31,7 +33,7 @@ class CustomBottomNavigation extends StatelessWidget {
         children: [
           BottomNavigationTab(
             icon: Icons.home,
-            text: 'Home',
+            text: LocaleKeys.bottom_bar_home.tr(),
             onPressed: () {
               onPageChanged(0);
               context.pushNamed(HomePage.pageName);
@@ -40,7 +42,7 @@ class CustomBottomNavigation extends StatelessWidget {
           ),
           BottomNavigationTab(
             icon: Icons.list,
-            text: 'Warranties',
+            text: LocaleKeys.bottom_bar_warranties.tr(),
             onPressed: () {
               onPageChanged(1);
               context.pushNamed(WarrantiesPage.pageName);
@@ -49,7 +51,7 @@ class CustomBottomNavigation extends StatelessWidget {
           ),
           BottomNavigationTab(
             icon: Icons.camera_alt,
-            text: 'Add',
+            text: LocaleKeys.bottom_bar_add.tr(),
             onPressed: () {
               onPageChanged(2);
               context.pushNamed(AddPage.pageName);
@@ -58,7 +60,7 @@ class CustomBottomNavigation extends StatelessWidget {
           ),
           BottomNavigationTab(
             icon: Icons.account_circle,
-            text: 'Profile',
+            text: LocaleKeys.bottom_bar_profile.tr(),
             onPressed: () {
               onPageChanged(3);
               context.pushNamed(ProfilePage.pageName);
@@ -67,7 +69,7 @@ class CustomBottomNavigation extends StatelessWidget {
           ),
           BottomNavigationTab(
             icon: Icons.volunteer_activism,
-            text: 'Donate',
+            text: LocaleKeys.bottom_bar_donate.tr(),
             onPressed: () {
               onPageChanged(4);
               context.pushNamed(DonationsPage.pageName);

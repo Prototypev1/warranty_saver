@@ -1,1 +1,12 @@
-{}
+{
+    "bottom_bar": {
+        "home": "Početna",
+        "warranties": "Garancije",
+        "add": "Dodaj",
+        "profile": "Profil",
+        "donate": "Doniraj"
+    },
+    "splash_page": {
+        "warranty_saver": "Čuvar garancija"
+    }
+}
