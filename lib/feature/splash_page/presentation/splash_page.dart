@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:warranty_saver/core/presentation/common/styles/custom_text_styles.dart';
+import 'package:warranty_saver/feature/home_page/presentation/home_page.dart';
 import 'package:warranty_saver/feature/splash_page/presentation/widgets/loading_bar.dart';
 import 'package:warranty_saver/feature/register_page/presentation/register_page.dart';
 
@@ -20,7 +21,7 @@ class SplashPage extends StatelessWidget {
             Center(
               child: LoadingBar(
                 onComplete: () {
-                  //context.goNamed(RegisterPage.pageName);
+                  context.goNamed(HomePage.pageName);
                 },
               ),
             ),
