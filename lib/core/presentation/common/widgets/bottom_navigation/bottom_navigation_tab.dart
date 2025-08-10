@@ -22,7 +22,7 @@ class BottomNavigationTab extends StatelessWidget {
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minHeight: 30,
-          maxHeight: 44,
+          maxHeight: 48,
           minWidth: MediaQuery.of(context).size.width / 6,
           maxWidth: MediaQuery.of(context).size.width / 5,
         ),

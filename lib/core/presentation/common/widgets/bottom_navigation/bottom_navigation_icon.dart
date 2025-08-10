@@ -17,13 +17,12 @@ class BottomNavigationIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Icon(icon, color: isActive ? Colors.black : Colors.grey),
-
+        Icon(icon, color: isActive ? Colors.black : Colors.grey.shade600),
         Text(
           title,
           style: isActive
-              ? CustomTextStyles.of(context).regular14.apply(color: Colors.black)
-              : CustomTextStyles.of(context).medium14.apply(color: Colors.grey),
+              ? CustomTextStyles.of(context).semiBold14.apply(color: Colors.black)
+              : CustomTextStyles.of(context).regular14.apply(color: Colors.grey.shade600),
         ),
       ],
     );

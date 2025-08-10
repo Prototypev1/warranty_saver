@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:warranty_saver/core/presentation/common/widgets/bottom_navigation/bottom_navigation_tab.dart';
+import 'package:warranty_saver/feature/add_page.dart/presentation/add_page.dart';
+import 'package:warranty_saver/feature/donations_page.dart/presentation/donations_page.dart';
+import 'package:warranty_saver/feature/home_page/presentation/home_page.dart';
+import 'package:warranty_saver/feature/profile_page/presentation/profile_page.dart';
+import 'package:warranty_saver/feature/warranties_page/presentation/warranties_page.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
   final int page;
@@ -19,38 +25,53 @@ class CustomBottomNavigation extends StatelessWidget {
           top: BorderSide(color: Colors.black, width: 1),
         ),
       ),
-      height: 56,
+      height: 64,
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
           BottomNavigationTab(
             icon: Icons.home,
             text: 'Home',
-            onPressed: () => onPageChanged(0),
+            onPressed: () {
+              onPageChanged(0);
+              context.pushNamed(HomePage.pageName);
+            },
             isActive: page == 0,
+          ),
+          BottomNavigationTab(
+            icon: Icons.list,
+            text: 'Warranties',
+            onPressed: () {
+              onPageChanged(1);
+              context.pushNamed(WarrantiesPage.pageName);
+            },
+            isActive: page == 1,
           ),
           BottomNavigationTab(
             icon: Icons.camera_alt,
             text: 'Add',
-            onPressed: () => onPageChanged(1),
-            isActive: page == 1,
-          ),
-          BottomNavigationTab(
-            icon: Icons.import_export,
-            text: 'Import',
-            onPressed: () => onPageChanged(2),
+            onPressed: () {
+              onPageChanged(2);
+              context.pushNamed(AddPage.pageName);
+            },
             isActive: page == 2,
           ),
           BottomNavigationTab(
             icon: Icons.account_circle,
             text: 'Profile',
-            onPressed: () => onPageChanged(3),
+            onPressed: () {
+              onPageChanged(3);
+              context.pushNamed(ProfilePage.pageName);
+            },
             isActive: page == 3,
           ),
           BottomNavigationTab(
-            icon: Icons.card_giftcard,
+            icon: Icons.volunteer_activism,
             text: 'Donate',
-            onPressed: () => onPageChanged(4),
+            onPressed: () {
+              onPageChanged(4);
+              context.pushNamed(DonationsPage.pageName);
+            },
             isActive: page == 4,
           ),
         ],
