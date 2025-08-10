@@ -99,6 +99,11 @@ unlinked_spec.ds
 **/ios/ServiceDefinitions.json
 **/ios/Runner/GeneratedPluginRegistrant.*
 
+# Easy Localization codegen
+lib/gen/
+**/codegen_loader.g.dart
+**/locale_keys.g.dart
+
 # Coverage
 coverage/
 

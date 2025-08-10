@@ -44,16 +44,23 @@ class _LoadingBarState extends State<LoadingBar> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width - 200,
-      height: 4,
-      color: Colors.white,
+      width: MediaQuery.of(context).size.width - 150,
+      height: 8,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(0),
+        border: Border.all(
+          color: Colors.black,
+          width: 1,
+        ),
+      ),
       child: AnimatedBuilder(
         animation: _animation,
         builder: (context, child) {
           return Align(
             alignment: Alignment.centerLeft,
             child: Container(
-              width: (MediaQuery.of(context).size.width - 200) * _animation.value,
+              width: (MediaQuery.of(context).size.width - 150) * _animation.value,
               height: 4,
               color: Colors.black,
             ),

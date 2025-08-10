@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:warranty_saver/di/di.dart';
 import 'package:warranty_saver/core/presentation/navigation/router_configuration.dart';
+import 'package:warranty_saver/gen/codegen_loader.g.dart';
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
@@ -23,11 +24,13 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
       runApp(
         EasyLocalization(
-          // assetLoader: const CodegenLoader(),
-          supportedLocales: const [Locale('en')],
+          assetLoader: const CodegenLoader(),
+          supportedLocales: const [Locale('en'), Locale('sr')],
+          startLocale: const Locale('sr'),
           path: 'assets/localization',
           fallbackLocale: const Locale('sr'),
           child: await builder(),
+          //saveLocale - remember the choice for the next launch
         ),
       );
     },
@@ -35,9 +38,4 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   );
 }
 
-void _initLogger() {
-  // Log.tag = '';
-
-  // Uncomment if you want simple logging
-  // Log.printer = null;
-}
+void _initLogger() {}

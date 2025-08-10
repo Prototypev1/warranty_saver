@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:warranty_saver/core/presentation/common/widgets/bottom_navigation/custom_bottom_navigation.dart';
 import 'package:warranty_saver/di/di.dart';
 import 'package:warranty_saver/feature/main_page_container/domain/cubit/main_page_cubit.dart';
 import 'package:warranty_saver/feature/main_page_container/domain/cubit/main_page_state.dart';
@@ -24,7 +25,7 @@ class _MainPageContainerState extends State<MainPageContainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(
           children: [
@@ -45,6 +46,15 @@ class _MainPageContainerState extends State<MainPageContainer> {
                     return SizedBox.shrink();
                   }
                 },
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: CustomBottomNavigation(
+                page: _cubit.state.page,
+                onPageChanged: _cubit.changePage,
               ),
             ),
           ],
