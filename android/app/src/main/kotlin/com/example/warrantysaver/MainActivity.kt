@@ -1,4 +1,4 @@
-package com.example.warranty_saver
+package com.example.warrantysaver
 
 import io.flutter.embedding.android.FlutterActivity
 
