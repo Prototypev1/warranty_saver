@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "156060165695",
+    "project_id": "warranty-saver-7705c",
+    "storage_bucket": "warranty-saver-7705c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156060165695:android:1752b758a5a95e38517a8a",
+        "android_client_info": {
+          "package_name": "com.example.warrantysaver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW8M09vTclVBnrN9bYqD4zuijO1e-6EyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
