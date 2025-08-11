@@ -22,16 +22,22 @@ class RouterConfiguration {
 
   void init() {
     _goRouter = GoRouter(
-      navigatorKey: rootNavigatorKey,
-      initialLocation: '/${SplashPage.pageName}',
+      navigatorKey: rootNavigatorKey, //custom.AppLifecycleListener.navigatorKey
       debugLogDiagnostics: kDebugMode,
+      initialLocation: '/',
+      redirect: (context, state) {
+        return null;
+      },
+
       routes: <RouteBase>[
         GoRoute(
+          parentNavigatorKey: rootNavigatorKey,
           name: SplashPage.pageName,
           path: '/${SplashPage.pageName}',
           builder: (context, state) => const SplashPage(),
         ),
         GoRoute(
+          parentNavigatorKey: rootNavigatorKey,
           name: RegisterPage.pageName,
           path: '/${RegisterPage.pageName}',
           builder: (context, state) => const RegisterPage(),
@@ -41,27 +47,32 @@ class RouterConfiguration {
           builder: (context, state, child) => MainPageContainer(child: child),
           routes: [
             GoRoute(
-              path: '/${HomePage.pageName}',
+              parentNavigatorKey: shellNavigatorKey,
+              path: HomePage.pageName,
               name: HomePage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const HomePage()),
             ),
             GoRoute(
-              path: '/${WarrantiesPage.pageName}',
+              parentNavigatorKey: shellNavigatorKey,
+              path: WarrantiesPage.pageName,
               name: WarrantiesPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const WarrantiesPage()),
             ),
             GoRoute(
-              path: '/${AddPage.pageName}',
+              parentNavigatorKey: shellNavigatorKey,
+              path: AddPage.pageName,
               name: AddPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const AddPage()),
             ),
             GoRoute(
-              path: '/${ProfilePage.pageName}',
+              parentNavigatorKey: shellNavigatorKey,
+              path: ProfilePage.pageName,
               name: ProfilePage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const ProfilePage()),
             ),
             GoRoute(
-              path: '/${DonationsPage.pageName}',
+              parentNavigatorKey: shellNavigatorKey,
+              path: DonationsPage.pageName,
               name: DonationsPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const DonationsPage()),
             ),

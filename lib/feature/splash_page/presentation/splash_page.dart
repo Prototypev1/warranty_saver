@@ -24,10 +24,7 @@ class SplashPage extends StatelessWidget {
             ).tr(),
             Center(
               child: LoadingBar(
-                onComplete: () {
-                  //if is first launch
-                  context.goNamed(RegisterPage.pageName);
-                },
+                onComplete: () => context.goNamed(RegisterPage.pageName),
               ),
             ),
           ],
