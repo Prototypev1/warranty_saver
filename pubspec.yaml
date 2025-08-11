@@ -29,6 +29,7 @@ dependencies:
       url: https://github.com/foresightmobile/logger_service.git
       ref: main
   meta: ^1.16.0
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
