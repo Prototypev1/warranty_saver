@@ -21,10 +21,14 @@ class SplashPage extends StatelessWidget {
             Text(
               LocaleKeys.splash_page_warranty_saver.tr(),
               style: CustomTextStyles.of(context).bold30.apply(color: Colors.black),
-            ).tr(),
+            ),
             Center(
               child: LoadingBar(
-                onComplete: () => context.goNamed(RegisterPage.pageName),
+                onComplete: () {
+                  print('LoadingBar completed - navigating to register');
+                  context.goNamed(RegisterPage.pageName);
+                  print('Navigation called to: ${RegisterPage.pageName}');
+                },
               ),
             ),
           ],

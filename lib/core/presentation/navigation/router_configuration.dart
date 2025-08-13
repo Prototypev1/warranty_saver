@@ -24,7 +24,7 @@ class RouterConfiguration {
     _goRouter = GoRouter(
       navigatorKey: rootNavigatorKey, //custom.AppLifecycleListener.navigatorKey
       debugLogDiagnostics: kDebugMode,
-      initialLocation: '/',
+      initialLocation: '/${SplashPage.pageName}',
       redirect: (context, state) {
         return null;
       },
