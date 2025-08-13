@@ -16,9 +16,7 @@ class App extends StatelessWidget {
       child: MaterialApp.router(
         theme: theme,
         localizationsDelegates: context.localizationDelegates,
-
         supportedLocales: context.supportedLocales,
-
         locale: context.locale,
         routerConfig: getIt.get<RouterConfiguration>().router,
         title: 'Warranty Saver',
