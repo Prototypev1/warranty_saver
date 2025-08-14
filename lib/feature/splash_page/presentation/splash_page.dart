@@ -25,9 +25,7 @@ class SplashPage extends StatelessWidget {
             Center(
               child: LoadingBar(
                 onComplete: () {
-                  print('LoadingBar completed - navigating to register');
                   context.goNamed(RegisterPage.pageName);
-                  print('Navigation called to: ${RegisterPage.pageName}');
                 },
               ),
             ),
