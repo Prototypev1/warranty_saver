@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:warranty_saver/core/domain/repository/theme_repository.dart';
 import 'package:warranty_saver/core/presentation/navigation/router_configuration.dart';
@@ -16,7 +17,10 @@ Future<void> _registerUtils() async {
   getIt
     ..registerSingleton<ThemeRepository>(ThemeRepository())
     ..registerSingleton<RouterConfiguration>(RouterConfiguration())
-    ..registerSingleton<RegisterPageRepository>(RegisterPageRepositoryImpl());
+    ..registerSingleton<FirebaseAuth>(FirebaseAuth.instance)
+    ..registerSingleton<RegisterPageRepository>(
+      RegisterPageRepositoryImpl(getIt<FirebaseAuth>()),
+    );
 }
 
 void _registerCubits() {

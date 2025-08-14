@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
@@ -28,50 +30,48 @@ class RouterConfiguration {
       redirect: (context, state) {
         return null;
       },
-
       routes: <RouteBase>[
         GoRoute(
-          parentNavigatorKey: rootNavigatorKey,
-          name: SplashPage.pageName,
           path: '/${SplashPage.pageName}',
-          builder: (context, state) => const SplashPage(),
+          name: SplashPage.pageName,
+          pageBuilder: (context, state) => _getPage(
+            key: state.pageKey,
+            child: const SplashPage(),
+          ),
         ),
         GoRoute(
-          parentNavigatorKey: rootNavigatorKey,
-          name: RegisterPage.pageName,
           path: '/${RegisterPage.pageName}',
-          builder: (context, state) => const RegisterPage(),
+          name: RegisterPage.pageName,
+          pageBuilder: (context, state) => _getPage(
+            key: state.pageKey,
+            child: const RegisterPage(),
+          ),
         ),
         ShellRoute(
           navigatorKey: shellNavigatorKey,
           builder: (context, state, child) => MainPageContainer(child: child),
           routes: [
             GoRoute(
-              parentNavigatorKey: shellNavigatorKey,
               path: HomePage.pageName,
               name: HomePage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const HomePage()),
             ),
             GoRoute(
-              parentNavigatorKey: shellNavigatorKey,
               path: WarrantiesPage.pageName,
               name: WarrantiesPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const WarrantiesPage()),
             ),
             GoRoute(
-              parentNavigatorKey: shellNavigatorKey,
               path: AddPage.pageName,
               name: AddPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const AddPage()),
             ),
             GoRoute(
-              parentNavigatorKey: shellNavigatorKey,
               path: ProfilePage.pageName,
               name: ProfilePage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const ProfilePage()),
             ),
             GoRoute(
-              parentNavigatorKey: shellNavigatorKey,
               path: DonationsPage.pageName,
               name: DonationsPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const DonationsPage()),
@@ -82,14 +82,11 @@ class RouterConfiguration {
     );
   }
 
-  // Page<dynamic> _getPage({required ValueKey<dynamic> key, required Widget child}) {
-  //   if (kIsWeb) {
-  //     return NoTransitionPage(key: key, child: child);
-  //   }
-  //   if (Platform.isAndroid) {
-  //     return NoTransitionPage(key: key, child: child);
-  //   } else {
-  //     return CupertinoPage(key: key, child: child);
-  //   }
-  // }
+  Page<dynamic> _getPage({required ValueKey<dynamic> key, required Widget child}) {
+    if (Platform.isAndroid) {
+      return NoTransitionPage(key: key, child: child);
+    } else {
+      return CupertinoPage(key: key, child: child);
+    }
+  }
 }
