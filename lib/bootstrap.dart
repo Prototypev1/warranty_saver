@@ -23,12 +23,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await EasyLocalization.ensureInitialized();
-
-      await initDI();
-
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
+      await initDI();
 
       if (!kIsWeb) {
         FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;

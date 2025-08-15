@@ -1,17 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:warranty_saver/gen/locale_keys.g.dart';
 
 class Helper {
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      return 'text_fields.email_required'.tr().toUpperCase();
+      return LocaleKeys.helper_email_required.tr();
     }
 
     final regex = RegExp(
       r'^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$',
     );
     if (!regex.hasMatch(value)) {
-      return 'text_fields.wrong_email'.tr().toUpperCase();
+      return LocaleKeys.helper_wrong_email.tr();
     }
     return null;
   }
@@ -40,11 +41,11 @@ class Helper {
 
   static String? validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      return 'text_fields.password_required'.tr().toUpperCase();
+      return LocaleKeys.helper_password_required.tr();
     }
 
     if (value.length < 8 || value.length > 50) {
-      return 'text_fields.password_length'.tr().toUpperCase();
+      return LocaleKeys.helper_password_length.tr();
     }
 
     const specialChars = r'!£$%&@?#~';
@@ -69,7 +70,7 @@ class Helper {
     final groupCount =
         (digitCount > 0 ? 1 : 0) + (lowerCount > 0 ? 1 : 0) + (upperCount > 0 ? 1 : 0) + (specialCount > 0 ? 1 : 0);
     if (groupCount < 3) {
-      return 'text_fields.password_complexity'.tr().toUpperCase();
+      return LocaleKeys.helper_complexity.tr();
     }
     return null;
   }

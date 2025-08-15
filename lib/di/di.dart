@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:warranty_saver/core/domain/repository/theme_repository.dart';
 import 'package:warranty_saver/core/presentation/navigation/router_configuration.dart';
 import 'package:warranty_saver/feature/main_page_container/domain/cubit/main_page_cubit.dart';
+import 'package:warranty_saver/feature/register_page/domain/cubit/register_page_cubit.dart';
+import 'package:warranty_saver/feature/register_page/domain/repository/register_page_repository.dart';
+import 'package:warranty_saver/feature/register_page/domain/repository/register_page_repository_impl.dart';
 
 final GetIt getIt = GetIt.instance;
 Future<void> initDI() async {
@@ -12,11 +16,15 @@ Future<void> initDI() async {
 Future<void> _registerUtils() async {
   getIt
     ..registerSingleton<ThemeRepository>(ThemeRepository())
-    ..registerSingleton<RouterConfiguration>(RouterConfiguration());
+    ..registerSingleton<RouterConfiguration>(RouterConfiguration())
+    ..registerSingleton<FirebaseAuth>(FirebaseAuth.instance)
+    ..registerSingleton<RegisterPageRepository>(
+      RegisterPageRepositoryImpl(getIt<FirebaseAuth>()),
+    );
 }
 
 void _registerCubits() {
   getIt
-  //..registerLazySingleton<LoadingPageCubit>(() => LoadingPageCubit())
-  .registerLazySingleton<MainPageCubit>(() => MainPageCubit());
+    ..registerLazySingleton<RegisterPageCubit>(() => RegisterPageCubit(getIt<RegisterPageRepository>()))
+    ..registerLazySingleton<MainPageCubit>(() => MainPageCubit());
 }
