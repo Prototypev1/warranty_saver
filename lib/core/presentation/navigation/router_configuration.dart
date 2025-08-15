@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'package:warranty_saver/feature/add_page.dart/presentation/add_page.dart';
 import 'package:warranty_saver/feature/donations_page.dart/presentation/donations_page.dart';
 import 'package:warranty_saver/feature/home_page/presentation/home_page.dart';
+import 'package:warranty_saver/feature/login_page/presentation/login_page.dart';
 import 'package:warranty_saver/feature/profile_page/presentation/profile_page.dart';
 import 'package:warranty_saver/feature/splash_page/presentation/splash_page.dart';
 import 'package:warranty_saver/feature/main_page_container/presentation/main_page_container.dart';
@@ -37,6 +38,14 @@ class RouterConfiguration {
           pageBuilder: (context, state) => _getPage(
             key: state.pageKey,
             child: const SplashPage(),
+          ),
+        ),
+        GoRoute(
+          path: '/${LoginPage.pageName}',
+          name: LoginPage.pageName,
+          pageBuilder: (context, state) => _getPage(
+            key: state.pageKey,
+            child: const LoginPage(),
           ),
         ),
         GoRoute(
