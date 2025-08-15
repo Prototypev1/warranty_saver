@@ -9,6 +9,7 @@ import 'package:warranty_saver/core/presentation/common/widgets/buttons/custom_r
 import 'package:warranty_saver/core/presentation/common/widgets/input_fields/custom_input_field.dart';
 import 'package:warranty_saver/di/di.dart';
 import 'package:warranty_saver/feature/home_page/presentation/home_page.dart';
+import 'package:warranty_saver/feature/login_page/presentation/login_page.dart';
 import 'package:warranty_saver/feature/register_page/domain/cubit/register_page_cubit.dart';
 import 'package:warranty_saver/feature/register_page/domain/cubit/register_page_state.dart';
 import 'package:warranty_saver/gen/locale_keys.g.dart';
@@ -55,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
           bloc: _registerPageCubit,
           listener: (context, state) {
             if (state is RegisterPageStateSuccess) {
-              context.goNamed(HomePage.pageName);
+              context.goNamed(LoginPage.pageName);
             } else if (state is RegisterPageStateError) {
               //TODO(Marko) Create a custom error message here
               ScaffoldMessenger.of(context).showSnackBar(
@@ -162,7 +163,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       const SizedBox(width: 2),
                       ClickableText(
                         text: LocaleKeys.buttons_login.tr(),
-                        onPressed: () {},
+                        onPressed: () {
+                          context.pushNamed(LoginPage.pageName);
+                        },
                       ),
                     ],
                   ),

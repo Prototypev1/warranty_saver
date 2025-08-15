@@ -30,5 +30,8 @@
         "wrong_email": "Neispravan email",
         "wrong_password": "Neispravna lozinka",
         "complexity": "Nedovoljna kompleksnost lozinke"
+    },
+    "login_page": {
+        "no_account": "Nemate nalog? "
     }
 }

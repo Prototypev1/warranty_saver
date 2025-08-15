@@ -22,7 +22,7 @@ class _LoadingBarState extends State<LoadingBar> with SingleTickerProviderStateM
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4),
+      duration: const Duration(seconds: 2),
     );
 
     _animation = Tween<double>(begin: 0, end: 1).animate(_controller)

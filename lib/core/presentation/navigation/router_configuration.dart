@@ -41,19 +41,19 @@ class RouterConfiguration {
           ),
         ),
         GoRoute(
-          path: '/${LoginPage.pageName}',
-          name: LoginPage.pageName,
-          pageBuilder: (context, state) => _getPage(
-            key: state.pageKey,
-            child: const LoginPage(),
-          ),
-        ),
-        GoRoute(
           path: '/${RegisterPage.pageName}',
           name: RegisterPage.pageName,
           pageBuilder: (context, state) => _getPage(
             key: state.pageKey,
             child: const RegisterPage(),
+          ),
+        ),
+        GoRoute(
+          path: '/${LoginPage.pageName}',
+          name: LoginPage.pageName,
+          pageBuilder: (context, state) => _getPage(
+            key: state.pageKey,
+            child: const LoginPage(),
           ),
         ),
         ShellRoute(
