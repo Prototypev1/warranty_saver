@@ -8,5 +8,27 @@
     },
     "splash_page": {
         "warranty_saver": "Čuvar garancija"
+    },
+    "register_page": {
+        "got_account": "Ili, ako već imate nalog "
+    },
+    "input_fields": {
+        "email": "Email",
+        "password": "Lozinka",
+        "repeat_password": "Ponovite lozinku",
+        "example_email": "primeremaila@gmail.com",
+        "example_password": "primerlozinke"
+    },
+    "buttons": {
+        "register": "Registracija",
+        "login": "Prijavite se"
+    },
+    "helper": {
+        "email_required": "Potreban email",
+        "password_required": "Potrebna lozinka",
+        "password_length": "Lozinka je kratka",
+        "wrong_email": "Neispravan email",
+        "wrong_password": "Neispravna lozinka",
+        "complexity": "Nedovoljna kompleksnost lozinke"
     }
 }

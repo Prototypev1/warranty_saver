@@ -8,5 +8,27 @@
     },
     "splash_page": {
         "warranty_saver": "Warranty Saver"
+    },
+    "register_page": {
+        "got_account": "Or if you already have an account "
+    },
+    "input_fields": {
+        "email": "Email",
+        "password": "Password",
+        "repeat_password": "Repeat Password",
+        "example_email": "exampleemail@gmail.com",
+        "example_password": "examplepassword"
+    },
+    "buttons": {
+        "register": "Register",
+        "login": "Login"
+    },
+    "helper": {
+        "email_required": "Email required",
+        "password_required": "Passowrd required",
+        "password_length": "Password too short",
+        "wrong_email": "Incorrect email",
+        "wrong_password": "Incorrect password",
+        "complexity": "Incorrect password complexity"
     }
 }

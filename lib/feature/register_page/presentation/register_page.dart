@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:warranty_saver/core/presentation/common/styles/custom_text_styles.dart';
 import 'package:warranty_saver/core/presentation/common/utils/helpers/helper.dart';
 import 'package:warranty_saver/core/presentation/common/widgets/buttons/clickable_text.dart';
@@ -55,11 +54,6 @@ class _RegisterPageState extends State<RegisterPage> {
           listener: (context, state) {},
           builder: (context, state) {
             if (state is RegisterPageStateInitial) {
-              final canSubmit =
-                  Helper.validateEmail(_emailController.text) == null &&
-                  Helper.validatePassword(_passwordController.text) == null &&
-                  _passwordController.text.isNotEmpty &&
-                  _passwordController.text == _repeatPasswordController.text;
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: Column(
@@ -71,13 +65,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     const Spacer(),
                     CustomTextField(
                       controller: _emailController,
-                      labelText: 'Email',
-                      hintText: 'exampleemail@gmail.com',
+                      labelText: LocaleKeys.input_fields_email,
+                      hintText: LocaleKeys.input_fields_example_email,
                       cursorColor: Colors.black,
                       focusedBorderColor: Colors.black,
                       enabledBorderColor: Colors.grey.shade700,
-                      hintStyle: TextStyle(color: Colors.grey.shade700),
                       prefixIcon: const Icon(Icons.email, color: Colors.black),
+                      hintStyle: TextStyle(color: Colors.grey.shade700),
                       validator: Helper.validateEmail,
                       textInputAction: TextInputAction.next,
                       onChanged: (v) {
@@ -87,13 +81,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     CustomTextField(
                       controller: _passwordController,
-                      labelText: 'Password',
-                      hintText: 'example password',
+                      labelText: LocaleKeys.input_fields_password,
+                      hintText: LocaleKeys.input_fields_example_password,
                       cursorColor: Colors.black,
                       focusedBorderColor: Colors.black,
                       enabledBorderColor: Colors.grey.shade700,
                       prefixIcon: Icon(Icons.password_rounded, color: Colors.black),
-
                       obscureText: !_pwdVisible,
                       suffixIcon: IconButton(
                         icon: Icon(_repeatPwdVisible ? Icons.visibility : Icons.visibility_off, color: Colors.black),
@@ -112,13 +105,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     CustomTextField(
                       controller: _repeatPasswordController,
-                      labelText: 'Repeat Password',
-                      hintText: 'example password',
+                      labelText: LocaleKeys.input_fields_repeat_password,
+                      hintText: LocaleKeys.input_fields_example_password,
                       cursorColor: Colors.black,
                       focusedBorderColor: Colors.black,
                       enabledBorderColor: Colors.grey.shade700,
                       prefixIcon: Icon(Icons.password_rounded, color: Colors.black),
-
                       obscureText: !_repeatPwdVisible,
                       suffixIcon: IconButton(
                         icon: Icon(_pwdVisible ? Icons.visibility : Icons.visibility_off, color: Colors.black),
@@ -126,13 +118,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       hintStyle: TextStyle(color: Colors.grey.shade700),
                       textInputAction: TextInputAction.done,
+                      validator: (v) =>
+                          Helper.validatePassword(v) ??
+                          (_passwordController.text == v ? null : 'Passwords do not match'),
                       onChanged: (v) {
                         _pwdsMatch = v == _passwordController.text;
                         setState(() {});
                       },
-                      validator: (v) =>
-                          Helper.validatePassword(v) ??
-                          (_passwordController.text == v ? null : 'Passwords do not match'),
                     ),
                     const Spacer(),
                     CustomRegisterButton(
@@ -141,7 +133,6 @@ class _RegisterPageState extends State<RegisterPage> {
                               final emailError = Helper.validateEmail(_emailController.text);
                               final pwdError = Helper.validatePassword(_passwordController.text);
                               if (emailError != null || pwdError != null || !_pwdsMatch) return;
-
                               _registerPageCubit.registerUser(
                                 email: _emailController.text,
                                 password: _passwordController.text,
@@ -149,17 +140,17 @@ class _RegisterPageState extends State<RegisterPage> {
                             }
                           : null,
                       isLoading: state is RegisterPageStateLoading,
-                      text: 'Register',
+                      text: LocaleKeys.buttons_register,
                     ),
                     const SizedBox(height: 10),
                     Row(
                       children: [
                         Text(
-                          'Or if you already have an account ',
+                          LocaleKeys.register_page_got_account,
                           style: CustomTextStyles.of(context).regular14.apply(color: Colors.black),
                         ),
                         ClickableText(
-                          text: 'Login',
+                          text: LocaleKeys.buttons_login,
                           onPressed: () {},
                         ),
                       ],
