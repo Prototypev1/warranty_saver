@@ -35,10 +35,10 @@ class CustomRegisterButton extends StatelessWidget {
       height: height ?? 50,
       width: width ?? MediaQuery.of(context).size.width,
       child: Material(
-        color: backgroundColor,
+        color: (onPressed == null || isLoading) ? Colors.grey.shade700 : backgroundColor,
         borderRadius: BorderRadius.circular(borderRadius ?? 8),
         child: InkWell(
-          onTap: isLoading ? null : onPressed,
+          onTap: (isLoading || onPressed == null) ? null : onPressed,
           borderRadius: BorderRadius.circular(borderRadius ?? 8),
           splashColor: Colors.white.withValues(alpha: .3),
           highlightColor: Colors.white.withValues(alpha: .1),

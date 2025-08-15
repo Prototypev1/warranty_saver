@@ -22,10 +22,14 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   late final RegisterPageCubit _registerPageCubit;
-  final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _repeatPasswordController = TextEditingController();
+  bool _pwdVisible = false;
+  bool _repeatPwdVisible = false;
+  bool _emailValid = false;
+  bool _pwdValid = false;
+  bool _pwdsMatch = false;
 
   @override
   void initState() {
@@ -51,6 +55,11 @@ class _RegisterPageState extends State<RegisterPage> {
           listener: (context, state) {},
           builder: (context, state) {
             if (state is RegisterPageStateInitial) {
+              final canSubmit =
+                  Helper.validateEmail(_emailController.text) == null &&
+                  Helper.validatePassword(_passwordController.text) == null &&
+                  _passwordController.text.isNotEmpty &&
+                  _passwordController.text == _repeatPasswordController.text;
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: Column(
@@ -71,8 +80,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       prefixIcon: const Icon(Icons.email, color: Colors.black),
                       validator: Helper.validateEmail,
                       textInputAction: TextInputAction.next,
+                      onChanged: (v) {
+                        _emailValid = Helper.validateEmail(v) == null;
+                        setState(() {});
+                      },
                     ),
                     CustomTextField(
+                      controller: _passwordController,
                       labelText: 'Password',
                       hintText: 'example password',
                       cursorColor: Colors.black,
@@ -80,12 +94,24 @@ class _RegisterPageState extends State<RegisterPage> {
                       enabledBorderColor: Colors.grey.shade700,
                       prefixIcon: Icon(Icons.password_rounded, color: Colors.black),
 
-                      suffixIcon: Icon(Icons.visibility_off, color: Colors.black),
+                      obscureText: !_pwdVisible,
+                      suffixIcon: IconButton(
+                        icon: Icon(_repeatPwdVisible ? Icons.visibility : Icons.visibility_off, color: Colors.black),
+                        onPressed: () => setState(() => _pwdVisible = !_pwdVisible),
+                      ),
                       hintStyle: TextStyle(color: Colors.grey.shade700),
                       textInputAction: TextInputAction.next,
-                      validator: Helper.validatePassword,
+                      validator: (v) =>
+                          Helper.validatePassword(v) ??
+                          (_passwordController.text == v ? null : 'Passwords do not match'),
+                      onChanged: (v) {
+                        _pwdValid = Helper.validatePassword(v) == null;
+                        _pwdsMatch = v == _repeatPasswordController.text;
+                        setState(() {});
+                      },
                     ),
                     CustomTextField(
+                      controller: _repeatPasswordController,
                       labelText: 'Repeat Password',
                       hintText: 'example password',
                       cursorColor: Colors.black,
@@ -93,22 +119,36 @@ class _RegisterPageState extends State<RegisterPage> {
                       enabledBorderColor: Colors.grey.shade700,
                       prefixIcon: Icon(Icons.password_rounded, color: Colors.black),
 
-                      suffixIcon: Icon(Icons.visibility_off, color: Colors.black),
+                      obscureText: !_repeatPwdVisible,
+                      suffixIcon: IconButton(
+                        icon: Icon(_pwdVisible ? Icons.visibility : Icons.visibility_off, color: Colors.black),
+                        onPressed: () => setState(() => _repeatPwdVisible = !_repeatPwdVisible),
+                      ),
                       hintStyle: TextStyle(color: Colors.grey.shade700),
                       textInputAction: TextInputAction.done,
-
-                      validator: Helper.validatePassword,
+                      onChanged: (v) {
+                        _pwdsMatch = v == _passwordController.text;
+                        setState(() {});
+                      },
+                      validator: (v) =>
+                          Helper.validatePassword(v) ??
+                          (_passwordController.text == v ? null : 'Passwords do not match'),
                     ),
                     const Spacer(),
                     CustomRegisterButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          _registerPageCubit.registerUser(
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          );
-                        }
-                      },
+                      onPressed: (_emailValid && _pwdValid && _pwdsMatch)
+                          ? () {
+                              final emailError = Helper.validateEmail(_emailController.text);
+                              final pwdError = Helper.validatePassword(_passwordController.text);
+                              if (emailError != null || pwdError != null || !_pwdsMatch) return;
+
+                              _registerPageCubit.registerUser(
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
+                            }
+                          : null,
+                      isLoading: state is RegisterPageStateLoading,
                       text: 'Register',
                     ),
                     const SizedBox(height: 10),

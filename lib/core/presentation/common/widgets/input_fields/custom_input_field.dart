@@ -74,17 +74,20 @@ class _CustomTextFieldState extends State<CustomTextField> with TickerProviderSt
   final _formKey = GlobalKey<FormState>();
   final _fieldKey = GlobalKey<FormFieldState<String>>();
   bool _showError = false;
+  String? _lastError;
 
   @override
   void initState() {
     super.initState();
     _node.addListener(() {
+      final value = widget.controller?.text ?? _fieldKey.currentState?.value;
+      _lastError = widget.validator?.call(value);
       if (!_node.hasFocus) {
-        _formKey.currentState?.validate();
-        _showError = _fieldKey.currentState?.errorText != null;
+        _showError = _lastError != null;
       } else {
         _showError = false;
       }
+      _formKey.currentState?.validate();
       setState(() {});
     });
   }
@@ -95,21 +98,26 @@ class _CustomTextFieldState extends State<CustomTextField> with TickerProviderSt
     super.dispose();
   }
 
+  String? _validatorProxy(String? value) {
+    _lastError = widget.validator?.call(value);
+    return _showError ? _lastError : null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final inputTextColor = widget.textColor ?? Colors.black;
     final cursorCol = widget.cursorColor ?? inputTextColor;
 
-    final enabledBorder = OutlineInputBorder(
+    final baseEnabledBorder = OutlineInputBorder(
       borderRadius: widget.borderRadius,
       borderSide: BorderSide(color: widget.enabledBorderColor ?? theme.dividerColor, width: 2),
     );
-    final focusedBorder = OutlineInputBorder(
+    final baseFocusedBorder = OutlineInputBorder(
       borderRadius: widget.borderRadius,
       borderSide: BorderSide(color: widget.focusedBorderColor ?? cursorCol, width: 2),
     );
-    final errorBorder = OutlineInputBorder(
+    final baseErrorBorder = OutlineInputBorder(
       borderRadius: widget.borderRadius,
       borderSide: BorderSide(color: widget.errorBorderColor ?? theme.colorScheme.error, width: 2),
     );
@@ -117,6 +125,10 @@ class _CustomTextFieldState extends State<CustomTextField> with TickerProviderSt
       borderRadius: widget.borderRadius,
       borderSide: BorderSide(color: widget.disabledBorderColor ?? theme.disabledColor, width: 2),
     );
+
+    final useError = _showError && (_lastError != null);
+    final enabledBorder = useError ? baseErrorBorder : baseEnabledBorder;
+    final focusedBorder = useError ? baseErrorBorder : baseFocusedBorder;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,17 +157,16 @@ class _CustomTextFieldState extends State<CustomTextField> with TickerProviderSt
               autovalidateMode: AutovalidateMode.disabled,
               onChanged: (v) {
                 widget.onChanged?.call(v);
-                _fieldKey.currentState?.validate();
+                _lastError = widget.validator?.call(v);
                 if (_node.hasFocus) {
-                  if ((_fieldKey.currentState?.errorText) == null) {
-                    _showError = false;
-                  }
+                  _showError = _lastError != null ? false : false;
                 } else {
-                  _showError = _fieldKey.currentState?.errorText != null;
+                  _showError = _lastError != null;
                 }
+                _formKey.currentState?.validate();
                 setState(() {});
               },
-              validator: widget.validator,
+              validator: _validatorProxy,
               focusNode: _node,
               onSaved: widget.onSaved,
               decoration: InputDecoration(
@@ -166,7 +177,8 @@ class _CustomTextFieldState extends State<CustomTextField> with TickerProviderSt
                 contentPadding: widget.contentPadding,
                 enabledBorder: enabledBorder,
                 focusedBorder: focusedBorder,
-                errorBorder: errorBorder,
+                errorBorder: baseErrorBorder,
+                focusedErrorBorder: baseErrorBorder,
                 disabledBorder: disabledBorder,
                 border: enabledBorder,
                 filled: widget.filled,
@@ -183,10 +195,10 @@ class _CustomTextFieldState extends State<CustomTextField> with TickerProviderSt
           alignment: Alignment.topLeft,
           child: Builder(
             builder: (_) {
-              final error = _fieldKey.currentState?.errorText;
-              if (!_showError || error == null) return const SizedBox.shrink();
+              final shouldShow = _showError && (_lastError != null);
+              if (!shouldShow) return const SizedBox.shrink();
               return Text(
-                error,
+                _lastError!,
                 style: CustomTextStyles.of(context).medium12.apply(color: theme.colorScheme.error),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
