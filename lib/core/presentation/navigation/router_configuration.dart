@@ -52,27 +52,27 @@ class RouterConfiguration {
           builder: (context, state, child) => MainPageContainer(child: child),
           routes: [
             GoRoute(
-              path: HomePage.pageName,
+              path: '/${HomePage.pageName}',
               name: HomePage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const HomePage()),
             ),
             GoRoute(
-              path: WarrantiesPage.pageName,
+              path: '/${WarrantiesPage.pageName}',
               name: WarrantiesPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const WarrantiesPage()),
             ),
             GoRoute(
-              path: AddPage.pageName,
+              path: '/${AddPage.pageName}',
               name: AddPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const AddPage()),
             ),
             GoRoute(
-              path: ProfilePage.pageName,
+              path: '/${ProfilePage.pageName}',
               name: ProfilePage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const ProfilePage()),
             ),
             GoRoute(
-              path: DonationsPage.pageName,
+              path: '/${DonationsPage.pageName}',
               name: DonationsPage.pageName,
               pageBuilder: (context, state) => NoTransitionPage(key: state.pageKey, child: const DonationsPage()),
             ),
