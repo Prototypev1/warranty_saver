@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:warranty_saver/core/domain/repository/theme_repository.dart';
@@ -17,9 +18,10 @@ Future<void> _registerUtils() async {
   getIt
     ..registerSingleton<ThemeRepository>(ThemeRepository())
     ..registerSingleton<RouterConfiguration>(RouterConfiguration())
+    ..registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance)
     ..registerSingleton<FirebaseAuth>(FirebaseAuth.instance)
     ..registerSingleton<RegisterPageRepository>(
-      RegisterPageRepositoryImpl(getIt<FirebaseAuth>()),
+      RegisterPageRepositoryImpl(getIt<FirebaseAuth>(), getIt<FirebaseFirestore>()),
     );
 }
 

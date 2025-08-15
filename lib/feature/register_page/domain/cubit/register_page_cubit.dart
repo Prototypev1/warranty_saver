@@ -8,11 +8,10 @@ class RegisterPageCubit extends Cubit<RegisterPageState> {
   final RegisterPageRepository _registerPageRepository;
 
   Future<void> registerUser({required String email, required String password}) async {
-    emit(const RegisterPageState.initial());
+    emit(const RegisterPageState.loading());
     try {
       await _registerPageRepository.registerUser(email: email, password: password);
       emit(const RegisterPageState.success());
-      //add bool true for success
     } on Exception catch (e) {
       emit(RegisterPageState.error(message: 'there was an error while registering a user, $e'));
     }

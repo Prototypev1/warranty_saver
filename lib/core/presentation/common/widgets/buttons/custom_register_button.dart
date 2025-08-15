@@ -25,7 +25,7 @@ class CustomRegisterButton extends StatelessWidget {
     this.width,
     this.padding,
     this.textStyle,
-    this.isLoading = false,
+    required this.isLoading,
     this.loadingWidget,
   });
 
