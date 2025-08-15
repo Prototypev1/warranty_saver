@@ -65,8 +65,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     const Spacer(),
                     CustomTextField(
                       controller: _emailController,
-                      labelText: LocaleKeys.input_fields_email,
-                      hintText: LocaleKeys.input_fields_example_email,
+                      labelText: LocaleKeys.input_fields_email.tr(),
+                      hintText: LocaleKeys.input_fields_example_email.tr(),
                       cursorColor: Colors.black,
                       focusedBorderColor: Colors.black,
                       enabledBorderColor: Colors.grey.shade700,
@@ -81,8 +81,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     CustomTextField(
                       controller: _passwordController,
-                      labelText: LocaleKeys.input_fields_password,
-                      hintText: LocaleKeys.input_fields_example_password,
+                      labelText: LocaleKeys.input_fields_password.tr(),
+                      hintText: LocaleKeys.input_fields_example_password.tr(),
                       cursorColor: Colors.black,
                       focusedBorderColor: Colors.black,
                       enabledBorderColor: Colors.grey.shade700,
@@ -105,8 +105,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     CustomTextField(
                       controller: _repeatPasswordController,
-                      labelText: LocaleKeys.input_fields_repeat_password,
-                      hintText: LocaleKeys.input_fields_example_password,
+                      labelText: LocaleKeys.input_fields_repeat_password.tr(),
+                      hintText: LocaleKeys.input_fields_example_password.tr(),
                       cursorColor: Colors.black,
                       focusedBorderColor: Colors.black,
                       enabledBorderColor: Colors.grey.shade700,
@@ -140,17 +140,18 @@ class _RegisterPageState extends State<RegisterPage> {
                             }
                           : null,
                       isLoading: state is RegisterPageStateLoading,
-                      text: LocaleKeys.buttons_register,
+                      text: LocaleKeys.buttons_register.tr(),
                     ),
                     const SizedBox(height: 10),
                     Row(
                       children: [
                         Text(
-                          LocaleKeys.register_page_got_account,
+                          LocaleKeys.register_page_got_account.tr(),
                           style: CustomTextStyles.of(context).regular14.apply(color: Colors.black),
                         ),
+                        const SizedBox(width: 2),
                         ClickableText(
-                          text: LocaleKeys.buttons_login,
+                          text: LocaleKeys.buttons_login.tr(),
                           onPressed: () {},
                         ),
                       ],
