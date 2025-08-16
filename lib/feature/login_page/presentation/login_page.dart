@@ -6,6 +6,7 @@ import 'package:warranty_saver/core/presentation/common/styles/custom_text_style
 import 'package:warranty_saver/core/presentation/common/utils/helpers/helper.dart';
 import 'package:warranty_saver/core/presentation/common/widgets/buttons/clickable_text.dart';
 import 'package:warranty_saver/core/presentation/common/widgets/buttons/custom_register_button.dart';
+import 'package:warranty_saver/core/presentation/common/widgets/checkboxes/custom_checkbox.dart';
 import 'package:warranty_saver/core/presentation/common/widgets/input_fields/custom_input_field.dart';
 import 'package:warranty_saver/di/di.dart';
 import 'package:warranty_saver/feature/add_page.dart/domain/cubit/login_page_cubit.dart';
@@ -28,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _pwdVisible = false;
   bool _emailValid = false;
   bool _pwdValid = false;
+  bool _accepted = false;
 
   @override
   void initState() {
@@ -107,10 +109,27 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {});
                     },
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      CustomCheckbox(
+                        value: _accepted,
+                        onChanged: (v) => setState(() => _accepted = v),
+                      ),
+
+                      Expanded(
+                        child: Text(
+                          LocaleKeys.login_page_keep_logged.tr(),
+                          style: CustomTextStyles.of(context).regular14.apply(color: Colors.black),
+                        ),
+                      ),
+                    ],
+                  ),
                   const Spacer(),
                   CustomRegisterButton(
                     isLoading: isLoading,
-                    onPressed: (!isLoading && _emailValid && _pwdValid)
+                    onPressed: (!isLoading && _emailValid && _pwdValid && _accepted)
                         ? () {
                             final emailError = Helper.validateEmail(_emailController.text);
                             final pwdError = Helper.validatePassword(_passwordController.text);

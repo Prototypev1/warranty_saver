@@ -32,6 +32,7 @@
         "complexity": "Nedovoljna kompleksnost lozinke"
     },
     "login_page": {
-        "no_account": "Nemate nalog? "
+        "no_account": "Nemate nalog? ",
+        "keep_logged": "Zadrži me prijavljenog"
     }
 }
