@@ -148,14 +148,13 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     children: [
                       Text(
-                        '${LocaleKeys.login_page_no_account.tr()} ',
+                        LocaleKeys.login_page_no_account.tr(),
                         style: CustomTextStyles.of(context).regular14.apply(color: Colors.black),
                       ),
                       const SizedBox(width: 2),
                       ClickableText(
                         text: LocaleKeys.buttons_register.tr(),
                         onPressed: () {
-                          print('debug');
                           context.pushNamed(RegisterPage.pageName);
                         },
                       ),
