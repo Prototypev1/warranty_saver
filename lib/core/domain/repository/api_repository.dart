@@ -57,9 +57,9 @@ class BaseApiRepository {
             if (retryCount < maxRetries - 1) {
               try {
                 // await _refreshAccessToken(_localRepository);
-                final newToken = _localRepository.getToken();
+                // final newToken = _localRepository.getToken();
                 final updatedHeaders = headers != null ? Map<String, String>.from(headers) : <String, String>{};
-                updatedHeaders['Authorization'] = 'Bearer $newToken';
+                //  updatedHeaders['Authorization'] = 'Bearer $newToken';
 
                 return get(
                   endpoint,
@@ -130,9 +130,9 @@ class BaseApiRepository {
             if (retryCount < maxRetries - 1) {
               try {
                 //await _refreshAccessToken(_localRepository);
-                final newToken = _localRepository.getToken();
+                // final newToken = _localRepository.getToken();
                 final updatedHeaders = headers != null ? Map<String, String>.from(headers) : <String, String>{};
-                updatedHeaders['Authorization'] = 'Bearer $newToken';
+                //updatedHeaders['Authorization'] = 'Bearer $newToken';
 
                 retryCount++;
                 await Future<void>.delayed(Duration(milliseconds: retryDelay));

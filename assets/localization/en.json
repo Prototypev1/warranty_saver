@@ -30,5 +30,9 @@
         "wrong_email": "Incorrect email",
         "wrong_password": "Incorrect password",
         "complexity": "Incorrect password complexity"
+    },
+    "login_page": {
+        "no_account": "Don't have an account? ",
+        "keep_logged": "Keep me logged in"
     }
 }
