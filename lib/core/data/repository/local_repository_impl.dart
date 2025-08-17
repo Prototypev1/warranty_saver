@@ -25,7 +25,17 @@ class LocalRepositoryImpl implements LocalRepository {
   @override
   Future<bool> isDeviceRemembered() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_rememberDeviceKey) ?? true;
+    return prefs.getBool(_rememberDeviceKey) ?? false;
+  }
+
+  @override
+  Future<bool> isLoggedIn() async {
+    return _sharedPreferences.getString(_emailKey) != null;
+  }
+
+  @override
+  Future<void> saveUser(String email) async {
+    await _sharedPreferences.setString(_emailKey, email);
   }
 
   @override
@@ -37,5 +47,6 @@ class LocalRepositoryImpl implements LocalRepository {
   @override
   Future<void> logout() async {
     await _sharedPreferences.remove(_emailKey);
+    await _sharedPreferences.remove(_rememberDeviceKey);
   }
 }

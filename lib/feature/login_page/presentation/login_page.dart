@@ -9,8 +9,9 @@ import 'package:warranty_saver/core/presentation/common/widgets/buttons/custom_r
 import 'package:warranty_saver/core/presentation/common/widgets/checkboxes/custom_checkbox.dart';
 import 'package:warranty_saver/core/presentation/common/widgets/input_fields/custom_input_field.dart';
 import 'package:warranty_saver/di/di.dart';
-import 'package:warranty_saver/feature/add_page.dart/domain/cubit/login_page_cubit.dart';
-import 'package:warranty_saver/feature/add_page.dart/domain/cubit/login_page_state.dart';
+import 'package:warranty_saver/feature/home_page/presentation/home_page.dart';
+import 'package:warranty_saver/feature/login_page/domain/cubit/login_page_cubit.dart';
+import 'package:warranty_saver/feature/login_page/domain/cubit/login_page_state.dart';
 import 'package:warranty_saver/feature/register_page/presentation/register_page.dart';
 import 'package:warranty_saver/gen/locale_keys.g.dart';
 
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           bloc: _loginPageCubit,
           listener: (context, state) {
             if (state is LoginPageStateSuccess) {
-              context.goNamed(LoginPage.pageName);
+              context.goNamed(HomePage.pageName);
             } else if (state is LoginPageStateError) {
               //TODO(Marko) Create a custom error message here
               ScaffoldMessenger.of(context).showSnackBar(
@@ -137,6 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                             _loginPageCubit.login(
                               email: _emailController.text,
                               password: _passwordController.text,
+                              rememberMe: _accepted,
                             );
                           }
                         : null,
