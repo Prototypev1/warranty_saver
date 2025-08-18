@@ -31,7 +31,7 @@ Future<void> _registerApiClient() async {
 Future<void> _registerUtils() async {
   getIt
     ..registerSingleton<ThemeRepository>(ThemeRepository())
-    ..registerSingleton<RouterConfiguration>(RouterConfiguration(getIt<LocalRepository>()))
+    ..registerSingleton<RouterConfiguration>(RouterConfiguration())
     ..registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance)
     ..registerSingleton<FirebaseAuth>(FirebaseAuth.instance)
     ..registerSingleton<RegisterPageRepository>(

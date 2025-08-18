@@ -15,9 +15,8 @@ import 'package:warranty_saver/feature/register_page/presentation/register_page.
 import 'package:warranty_saver/feature/warranties_page/presentation/warranties_page.dart';
 
 class RouterConfiguration {
-  RouterConfiguration(this._localRepository);
+  RouterConfiguration();
 
-  final LocalRepository _localRepository;
   late final GoRouter _goRouter;
 
   final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -30,24 +29,7 @@ class RouterConfiguration {
       navigatorKey: rootNavigatorKey, //custom.AppLifecycleListener.navigatorKey
       debugLogDiagnostics: kDebugMode,
       initialLocation: '/${SplashPage.pageName}',
-      redirect: (context, state) async {
-        final bool isFirstLaunch = await _localRepository.isFirstLaunch();
-        print(isFirstLaunch);
-        final bool isLoggedIn = await _localRepository.isLoggedIn();
-        print(isLoggedIn);
-        final bool isDeviceRemembered = await _localRepository.isDeviceRemembered();
-        print(isDeviceRemembered);
 
-        if (isFirstLaunch) {
-          return '/${SplashPage.pageName}';
-        }
-
-        if (isLoggedIn && isDeviceRemembered) {
-          return '/${HomePage.pageName}';
-        }
-
-        return '/${LoginPage.pageName}';
-      },
       routes: <RouteBase>[
         GoRoute(
           path: '/${SplashPage.pageName}',

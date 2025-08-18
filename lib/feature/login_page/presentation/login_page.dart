@@ -76,7 +76,6 @@ class _LoginPageState extends State<LoginPage> {
                   CustomTextField(
                     controller: _emailController,
                     labelText: LocaleKeys.input_fields_email.tr(),
-                    hintText: LocaleKeys.input_fields_example_email.tr(),
                     cursorColor: Colors.black,
                     focusedBorderColor: Colors.black,
                     enabledBorderColor: Colors.grey.shade700,
@@ -92,7 +91,6 @@ class _LoginPageState extends State<LoginPage> {
                   CustomTextField(
                     controller: _passwordController,
                     labelText: LocaleKeys.input_fields_password.tr(),
-                    hintText: LocaleKeys.input_fields_example_password.tr(),
                     cursorColor: Colors.black,
                     focusedBorderColor: Colors.black,
                     enabledBorderColor: Colors.grey.shade700,
