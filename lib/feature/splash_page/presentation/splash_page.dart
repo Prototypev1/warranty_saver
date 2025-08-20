@@ -1,4 +1,3 @@
-// splash_page.dart
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -16,27 +15,6 @@ class SplashPage extends StatelessWidget {
   static const pageName = 'splash';
   const SplashPage({super.key});
 
-  Future<void> _routeAfterSplash(BuildContext context) async {
-    final repo = GetIt.I<LocalRepository>();
-
-    final isFirstLaunch = await repo.isFirstLaunch();
-    if (isFirstLaunch && context.mounted) {
-      context.goNamed(RegisterPage.pageName);
-      return;
-    }
-
-    final isLoggedIn = await repo.isLoggedIn();
-    final isRemembered = await repo.isDeviceRemembered();
-
-    if (isLoggedIn && isRemembered && context.mounted) {
-      context.goNamed(HomePage.pageName);
-    } else {
-      if (context.mounted) {
-        context.goNamed(LoginPage.pageName);
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,7 +29,24 @@ class SplashPage extends StatelessWidget {
             ),
             Center(
               child: LoadingBar(
-                onComplete: () => _routeAfterSplash(context),
+                onComplete: () async {
+                  final repo = GetIt.I<LocalRepository>();
+                  final isFirst = await repo.isFirstLaunch();
+                  final isLoggedIn = await repo.isLoggedIn();
+                  final isRemembered = await repo.isDeviceRemembered();
+
+                  if (isFirst && context.mounted) {
+                    context.goNamed(RegisterPage.pageName);
+                    return;
+                  }
+                  if (isLoggedIn && isRemembered && context.mounted) {
+                    context.goNamed(HomePage.pageName);
+                  } else {
+                    if (context.mounted) {
+                      context.goNamed(LoginPage.pageName);
+                    }
+                  }
+                },
               ),
             ),
           ],
@@ -60,26 +55,3 @@ class SplashPage extends StatelessWidget {
     );
   }
 }
-
-// SplashPage build: keep UI; only change onComplete:
-// LoadingBar(
-//   onComplete: () async {
-//     final repo = GetIt.I<LocalRepository>();
-
-//     final isFirst = await repo.isFirstLaunch();
-//     final isLoggedIn = await repo.isLoggedIn();
-//     final isRemembered = await repo.isDeviceRemembered();
-//     debugPrint('Splash route checks => isFirst:$isFirst loggedIn:$isLoggedIn remembered:$isRemembered');
-
-//     if (isFirst) {
-//       context.goNamed(RegisterPage.pageName);
-//       return;
-//     }
-
-//     if (isLoggedIn && isRemembered) {
-//       context.goNamed(HomePage.pageName);
-//     } else {
-//       context.goNamed(LoginPage.pageName);
-//     }
-//   },
-// ),

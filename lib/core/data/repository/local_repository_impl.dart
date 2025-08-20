@@ -13,7 +13,7 @@ class LocalRepositoryImpl implements LocalRepository {
   @override
   Future<bool> isFirstLaunch() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(_firstLaunchKey) ?? true;
+    return prefs.getBool(_firstLaunchKey) ?? false;
   }
 
   @override
