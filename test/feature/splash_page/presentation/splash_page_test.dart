@@ -47,22 +47,22 @@ GoRouter _buildTestRouter() => GoRouter(
     GoRoute(
       name: SplashPage.pageName,
       path: '/',
-      builder: (_, __) => const SplashPage(),
+      builder: (_, _) => const SplashPage(),
     ),
     GoRoute(
       name: RegisterPage.pageName,
       path: '/register',
-      builder: (_, __) => const _RegisterScreen(),
+      builder: (_, _) => const _RegisterScreen(),
     ),
     GoRoute(
       name: LoginPage.pageName,
       path: '/login',
-      builder: (_, __) => const _LoginScreen(),
+      builder: (_, _) => const _LoginScreen(),
     ),
     GoRoute(
       name: HomePage.pageName,
       path: '/home',
-      builder: (_, __) => const _HomeScreen(),
+      builder: (_, _) => const _HomeScreen(),
     ),
   ],
 );

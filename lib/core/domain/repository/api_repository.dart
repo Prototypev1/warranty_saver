@@ -2,12 +2,10 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:logger_service/logger_service.dart';
 import 'package:warranty_saver/config.dart';
-import 'package:warranty_saver/core/domain/repository/local_repository.dart';
 
 class BaseApiRepository {
-  const BaseApiRepository(this._dioClient, this._localRepository);
+  const BaseApiRepository(this._dioClient);
   final Dio _dioClient;
-  final LocalRepository _localRepository;
 
   Future<Map<String, dynamic>> get(
     String endpoint, {
@@ -131,7 +129,7 @@ class BaseApiRepository {
               try {
                 //await _refreshAccessToken(_localRepository);
                 // final newToken = _localRepository.getToken();
-                final updatedHeaders = headers != null ? Map<String, String>.from(headers) : <String, String>{};
+                // final updatedHeaders = headers != null ? Map<String, String>.from(headers) : <String, String>{};
                 //updatedHeaders['Authorization'] = 'Bearer $newToken';
 
                 retryCount++;

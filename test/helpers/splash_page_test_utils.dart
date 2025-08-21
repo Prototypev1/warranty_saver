@@ -28,10 +28,10 @@ class _HomeScreen extends StatelessWidget {
 GoRouter buildSplashRouter() => GoRouter(
   initialLocation: '/',
   routes: [
-    GoRoute(name: SplashPage.pageName, path: '/', builder: (_, __) => const SplashPage()),
-    GoRoute(name: RegisterPage.pageName, path: '/register', builder: (_, __) => const _RegisterScreen()),
-    GoRoute(name: LoginPage.pageName, path: '/login', builder: (_, __) => const _LoginScreen()),
-    GoRoute(name: HomePage.pageName, path: '/home', builder: (_, __) => const _HomeScreen()),
+    GoRoute(name: SplashPage.pageName, path: '/', builder: (_, _) => const SplashPage()),
+    GoRoute(name: RegisterPage.pageName, path: '/register', builder: (_, _) => const _RegisterScreen()),
+    GoRoute(name: LoginPage.pageName, path: '/login', builder: (_, _) => const _LoginScreen()),
+    GoRoute(name: HomePage.pageName, path: '/home', builder: (_, _) => const _HomeScreen()),
   ],
 );
 

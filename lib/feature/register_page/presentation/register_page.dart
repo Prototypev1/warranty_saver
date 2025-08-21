@@ -8,7 +8,6 @@ import 'package:warranty_saver/core/presentation/common/widgets/buttons/clickabl
 import 'package:warranty_saver/core/presentation/common/widgets/buttons/custom_register_button.dart';
 import 'package:warranty_saver/core/presentation/common/widgets/input_fields/custom_input_field.dart';
 import 'package:warranty_saver/di/di.dart';
-import 'package:warranty_saver/feature/home_page/presentation/home_page.dart';
 import 'package:warranty_saver/feature/login_page/presentation/login_page.dart';
 import 'package:warranty_saver/feature/register_page/domain/cubit/register_page_cubit.dart';
 import 'package:warranty_saver/feature/register_page/domain/cubit/register_page_state.dart';
